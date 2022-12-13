@@ -77,5 +77,5 @@ public class NotaEntity {
     public void setValor(Long valor) {
         this.valor = valor;
     }
-    
+
 }

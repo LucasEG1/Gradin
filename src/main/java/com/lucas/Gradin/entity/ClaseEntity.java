@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -62,5 +63,12 @@ public class ClaseEntity {
     }
     public int getAlumnos() {
         return alumnos.size();
+    }
+
+    @PreRemove
+    private void nullify() {
+        for (AlumnoEntity alumno : alumnos) {
+            alumno.setClase(null);
+        }
     }
 }

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -23,7 +24,8 @@ public class ProfesorEntity {
     private Long id;
 
     private String nombre;
-    private String apellido;
+    private String apellido1;
+    private String apellido2;
     private String email;
     private String DNI;
 
@@ -34,14 +36,15 @@ public class ProfesorEntity {
     public ProfesorEntity() {
         this.asignaturas = new ArrayList<AsignaturaEntity>();
     }
-    public ProfesorEntity(Long id, String nombre, String apellido, String email, String dNI) {
-        this.id = id;
+    public ProfesorEntity(String nombre, String apellido1, String apellido2, String email, String dNI) {
         this.nombre = nombre;
-        this.apellido = apellido;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
         this.email = email;
         DNI = dNI;
         this.asignaturas = new ArrayList<AsignaturaEntity>();
     }
+
 
     //Getters y Setters
     public Long getId() {
@@ -55,11 +58,18 @@ public class ProfesorEntity {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getApellido1() {
+        return apellido1;
     }
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellido1(String apellido1) {
+        this.apellido1 = apellido1;
+    }
+
+    public String getApellido2() {
+        return apellido2;
+    }
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
     }
 
     public String getEmail() {
@@ -78,5 +88,12 @@ public class ProfesorEntity {
 
     public int getAsignaturas() {
         return asignaturas.size();
+    }
+
+    @PreRemove
+    public void nullify() {
+        for (AsignaturaEntity oAsignatura : asignaturas) {
+            oAsignatura.setProfesor(null); // Lo mismo que forEach
+        }
     }
 }

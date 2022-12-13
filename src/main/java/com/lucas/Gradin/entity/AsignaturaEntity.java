@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -76,4 +77,12 @@ public class AsignaturaEntity {
     public int getNotas() {
         return notas.size();
     }
+
+    @PreRemove
+    public void nullify() {
+        for (NotaEntity nota : notas) {
+            nota.setAsignatura(null);
+        }
+    }
+
 }

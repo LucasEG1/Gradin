@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,5 +74,10 @@ public class EscuelaEntity {
         return aulas.size();
     }
 
-    
+    @PreRemove
+    public void nullify() {
+        for (AulaEntity aula : aulas) {
+            aula.setEscuela(null);
+        }
+    }
 }

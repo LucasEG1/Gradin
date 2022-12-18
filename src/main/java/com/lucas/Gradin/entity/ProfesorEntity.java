@@ -31,7 +31,7 @@ public class ProfesorEntity {
     private String email;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String password;
+    private String pass;
 
     private boolean superuser;
 
@@ -95,11 +95,11 @@ public class ProfesorEntity {
         dni = dNI;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPass() {
+        return pass;
     }
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public int getAsignaturas() {

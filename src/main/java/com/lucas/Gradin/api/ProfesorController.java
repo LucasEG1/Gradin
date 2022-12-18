@@ -39,7 +39,7 @@ public class ProfesorController {
 
     @GetMapping
     public ResponseEntity<Page<ProfesorEntity>> getPage(
-            @PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable oPageable,
+            @PageableDefault(page = 0, size = 5, direction = Sort.Direction.DESC) Pageable oPageable,
             @RequestParam(name = "filter", required = false) String strFilter) {
         return new ResponseEntity<>(oProfesorService.getPage(oPageable, strFilter), HttpStatus.OK);
     }
@@ -51,8 +51,8 @@ public class ProfesorController {
 
     // Metodos POST
     @PostMapping
-    public ResponseEntity<ProfesorEntity> create(ProfesorEntity oProfesorEntity) {
-        return new ResponseEntity<ProfesorEntity>(oProfesorService.create(oProfesorEntity), HttpStatus.OK);
+    public ResponseEntity<Long> create(ProfesorEntity oProfesorEntity) {
+        return new ResponseEntity<Long>(oProfesorService.create(oProfesorEntity), HttpStatus.OK);
     }
 
     // Metodos PUT

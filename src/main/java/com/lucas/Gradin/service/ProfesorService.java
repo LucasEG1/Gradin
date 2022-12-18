@@ -51,11 +51,11 @@ public class ProfesorService {
         }
     }
 
-    public ProfesorEntity create(ProfesorEntity oNewProfesorEntity) {
+    public Long create(ProfesorEntity oNewProfesorEntity) {
         validateEntity(oNewProfesorEntity);
         //oAuthService.OnlySuperuser();
-        oNewProfesorEntity.setPassword(GRADIN_DEFAULT_PASSWORD);
-        return oProfesorRepository.save(oNewProfesorEntity);
+        oNewProfesorEntity.setPass(GRADIN_DEFAULT_PASSWORD);
+        return oProfesorRepository.save(oNewProfesorEntity).getId();
     }
 
     public ProfesorEntity update(ProfesorEntity oProfesorEntity) {

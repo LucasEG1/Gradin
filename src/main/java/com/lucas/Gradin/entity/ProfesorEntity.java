@@ -13,6 +13,7 @@ import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "profesor")
@@ -23,11 +24,18 @@ public class ProfesorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String dni;
     private String nombre;
     private String apellido1;
     private String apellido2;
     private String email;
-    private String DNI;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
+
+    private boolean superuser;
+
+
 
     @OneToMany(mappedBy = "profesor", fetch = FetchType.LAZY)
     private List<AsignaturaEntity> asignaturas;
@@ -36,12 +44,13 @@ public class ProfesorEntity {
     public ProfesorEntity() {
         this.asignaturas = new ArrayList<AsignaturaEntity>();
     }
-    public ProfesorEntity(String nombre, String apellido1, String apellido2, String email, String dNI) {
+    public ProfesorEntity(String nombre, String apellido1, String apellido2, String email, String dNI, boolean isSuperuser) {
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.email = email;
-        DNI = dNI;
+        dni = dNI;
+        this.superuser = isSuperuser;
         this.asignaturas = new ArrayList<AsignaturaEntity>();
     }
 
@@ -79,15 +88,26 @@ public class ProfesorEntity {
         this.email = email;
     }
 
-    public String getDNI() {
-        return DNI;
+    public String getDni() {
+        return dni;
     }
-    public void setDNI(String dNI) {
-        DNI = dNI;
+    public void setDni(String dNI) {
+        dni = dNI;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getAsignaturas() {
         return asignaturas.size();
+    }
+
+    public boolean isSuperuser() {
+        return this.superuser;
     }
 
     @PreRemove

@@ -46,6 +46,8 @@ create table if not exists profesor (
     apellido1 varchar(128) not null,
     apellido2 varchar(128),
     email varchar(128),
+    password varchar(128) not null default "7a84143d54b59fe2186d394f66fa59b5b81e12c8edf9cbe71cece88d9388ff45",
+    superuser tinyint(1) not null default 0
     primary key (id)
 );
 -- asignatura
@@ -116,12 +118,13 @@ values
 (6, "32109876L", "32109876", "Lucía", "Jiménez", null, "luciaji@gradin.com" , "321098765")
 ;
 
-insert into profesor (DNI, nombre, apellido1, apellido2, email)
+insert into profesor (DNI, nombre, apellido1, apellido2, email, superuser)
 values
-("12345678A", "Adrián", "Ruiz", "Díez", "adrianru@gradin.com"),
-("87654321B", "Beatriz", "García", "González", "beatrizga@gradin.com"),
-("23456789C", "Carlos", "López", "Casado", "carloslo@gradin.com"),
-("98765432D", "Dolores", "Martínez", "Gómez", "doloresma@gradin.com")
+("00000000T", "Admin", "Admin", null, "superuser@gradin.com", 1),
+("12345678A", "Adrián", "Ruiz", "Díez", "adrianru@gradin.com", 0),
+("87654321B", "Beatriz", "García", "González", "beatrizga@gradin.com", 0),
+("23456789C", "Carlos", "López", "Casado", "carloslo@gradin.com", 0),
+("98765432D", "Dolores", "Martínez", "Gómez", "doloresma@gradin.com", 0)
 ;
 
 insert into asignatura (id_profesor, nombre)

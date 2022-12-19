@@ -22,7 +22,7 @@ public class AuthService {
     // OPERACIONES DE SESIÓN
     public ProfesorEntity login(@RequestBody ProfesorBean oProfesorBean) {
         if (oProfesorBean.getPassword() != null) {
-            ProfesorEntity oProfesorEntity = oProfesorRepository.findByDniAndPassword(oProfesorBean.getDNI(), oProfesorBean.getPassword());
+            ProfesorEntity oProfesorEntity = oProfesorRepository.findByDniAndPass(oProfesorBean.getDni(), oProfesorBean.getPassword());
             if (oProfesorEntity != null) {
                 oHttpSession.setAttribute("profesor", oProfesorEntity);
                 return oProfesorEntity;

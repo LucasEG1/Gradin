@@ -30,8 +30,7 @@ public class ProfesorService {
     public void validateEntity(ProfesorEntity oProfesorEntity) {
         ValidationHelper.validateDNI(oProfesorEntity.getDni() , "campo DNI de Usuario");
         ValidationHelper.validateStringLength(oProfesorEntity.getNombre(), 2, 20, "campo 'nombre' del profesor debe tener longitud entre 2 y 20 caracteres");
-        ValidationHelper.validateStringLength(oProfesorEntity.getApellido1(), 2, 20, "campo 'nombre' del profesor debe tener longitud entre 2 y 20 caracteres");
-        ValidationHelper.validateStringLength(oProfesorEntity.getApellido2(), 2, 20, "campo 'nombre' del profesor debe tener longitud entre 2 y 20 caracteres");
+        ValidationHelper.validateStringLength(oProfesorEntity.getApellido1(), 2, 20, "campo 'apellido 1' del profesor debe tener longitud entre 2 y 20 caracteres");
         ValidationHelper.validateEmail(oProfesorEntity.getEmail(), " proporciona un correo electrónico válido");
     }
 

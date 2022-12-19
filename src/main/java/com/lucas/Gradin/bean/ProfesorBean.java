@@ -6,17 +6,17 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class ProfesorBean {
     
     @Schema
-    private String DNI = "";
+    private String dni = "";
     @Schema
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password = "";
 
-    public String getDNI() {
-        return DNI;
+    public String getDni() {
+        return dni;
     }
 
-    public void setDNI(String dni) {
-        this.DNI = dni;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getPassword() {

@@ -28,7 +28,7 @@ create table if not exists clase (
 create table if not exists alumno (
     id bigint not null auto_increment,
     id_clase bigint not null,
-    DNI varchar(9) not null,
+    dni varchar(9) not null,
     NIA varchar(9) not null,
     nombre varchar(128) not null,
     apellido1 varchar(128) not null,
@@ -41,7 +41,7 @@ create table if not exists alumno (
 -- profesor
 create table if not exists profesor (
     id bigint not null auto_increment,
-    DNI varchar(9) not null,
+    dni varchar(9) not null,
     nombre varchar(128) not null,
     apellido1 varchar(128) not null,
     apellido2 varchar(128),
@@ -102,7 +102,7 @@ values
 (6, "2ºBACH Artístico")
 ;
 
-insert into alumno (id_clase, DNI, NIA, nombre, apellido1, apellido2, email, telefono)
+insert into alumno (id_clase, dni, NIA, nombre, apellido1, apellido2, email, telefono)
 values
 (1, "12345678A", "12345678", "Juan", "Pérez", "García", "juanpe@gradin.com" , "123456789"),
 (1, "87654321B", "87654321", "María", "García", "Pérez", "mariaga@gradin.com" , "987654321"),
@@ -118,7 +118,7 @@ values
 (6, "32109876L", "32109876", "Lucía", "Jiménez", null, "luciaji@gradin.com" , "321098765")
 ;
 
-insert into profesor (DNI, nombre, apellido1, apellido2, email, superuser)
+insert into profesor (dni, nombre, apellido1, apellido2, email, superuser)
 values
 ("00000000T", "Admin", "Admin", null, "superuser@gradin.com", 1),
 ("12345678A", "Adrián", "Ruiz", "Díez", "adrianru@gradin.com", 0),

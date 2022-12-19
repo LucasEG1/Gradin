@@ -34,8 +34,8 @@ public class AlumnoEntity {
     private String nombre;
     private String apellido1;
     private String apellido2;
-    private String DNI;
-    private String NIA;
+    private String dni;
+    private String nia;
     private String email;
     private String telefono;
 
@@ -47,14 +47,14 @@ public class AlumnoEntity {
     public AlumnoEntity() {
         this.notas = new ArrayList<NotaEntity>();
     }
-    public AlumnoEntity(Long id, ClaseEntity clase, String nombre, String apellido1, String apellido2, String dNI, String nIA, String email, String telefono) {
+    public AlumnoEntity(Long id, ClaseEntity clase, String nombre, String apellido1, String apellido2, String dni, String nIA, String email, String telefono) {
         this.id = id;
         this.clase = clase;
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
-        DNI = dNI;
-        NIA = nIA;
+        this.dni = dni;
+        nia = nIA;
         this.email = email;
         this.telefono = telefono;
         this.notas = new ArrayList<NotaEntity>();
@@ -93,18 +93,18 @@ public class AlumnoEntity {
         this.apellido2 = apellido2;
     }
 
-    public String getDNI() {
-        return DNI;
+    public String getDni() {
+        return dni;
     }
-    public void setDNI(String dNI) {
-        DNI = dNI;
+    public void setDni(String DNI) {
+        dni = DNI;
     }
 
-    public String getNIA() {
-        return NIA;
+    public String getNia() {
+        return nia;
     }
-    public void setNIA(String nIA) {
-        NIA = nIA;
+    public void setNia(String nIA) {
+        nia = nIA;
     }
 
     public String getEmail() {

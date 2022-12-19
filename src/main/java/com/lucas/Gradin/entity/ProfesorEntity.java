@@ -44,12 +44,12 @@ public class ProfesorEntity {
     public ProfesorEntity() {
         this.asignaturas = new ArrayList<AsignaturaEntity>();
     }
-    public ProfesorEntity(String nombre, String apellido1, String apellido2, String email, String dNI, boolean isSuperuser) {
+    public ProfesorEntity(String nombre, String apellido1, String apellido2, String email, String dni, boolean isSuperuser) {
+        this.dni = dni;
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.email = email;
-        dni = dNI;
         this.superuser = isSuperuser;
         this.asignaturas = new ArrayList<AsignaturaEntity>();
     }
@@ -58,6 +58,9 @@ public class ProfesorEntity {
     //Getters y Setters
     public Long getId() {
         return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombre() {

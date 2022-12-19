@@ -50,11 +50,12 @@ public class ProfesorService {
         }
     }
 
-    public Long create(ProfesorEntity oNewProfesorEntity) {
-        validateEntity(oNewProfesorEntity);
+    public Long create(ProfesorEntity profesorRecibido) {
         //oAuthService.OnlySuperuser();
-        oNewProfesorEntity.setPass(GRADIN_DEFAULT_PASSWORD);
-        return oProfesorRepository.save(oNewProfesorEntity).getId();
+        validateEntity(profesorRecibido);
+        profesorRecibido.setId(0L);
+        profesorRecibido.setPass(GRADIN_DEFAULT_PASSWORD);
+        return oProfesorRepository.save(profesorRecibido).getId();
     }
 
     public ProfesorEntity update(ProfesorEntity oProfesorEntity) {

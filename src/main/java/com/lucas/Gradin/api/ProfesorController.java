@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,14 +51,14 @@ public class ProfesorController {
     }
 
     // Metodos POST
-    @PostMapping
-    public ResponseEntity<Long> create(ProfesorEntity oProfesorEntity) {
+    @PostMapping("/new")
+    public ResponseEntity<Long> create(@RequestBody ProfesorEntity oProfesorEntity) {
         return new ResponseEntity<Long>(oProfesorService.create(oProfesorEntity), HttpStatus.OK);
     }
 
     // Metodos PUT
     @PutMapping
-    public ResponseEntity<ProfesorEntity> update(ProfesorEntity oProfesorEntity) {
+    public ResponseEntity<ProfesorEntity> update(@RequestBody ProfesorEntity oProfesorEntity) {
         return new ResponseEntity<ProfesorEntity>(oProfesorService.update(oProfesorEntity), HttpStatus.OK);
     }
 

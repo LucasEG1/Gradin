@@ -36,12 +36,12 @@ public class ProfesorService {
 
     public ProfesorEntity getOne(Long id) {
         validate(id);
-        //oAuthService.OnlyOwnerOrSuperuser(id);
+        oAuthService.OnlyOwnerOrSuperuser(id);
         return oProfesorRepository.findById(id).get();
     }
 
     public Page<ProfesorEntity> getPage(Pageable oPageable, String strFilter) {
-        //oAuthService.OnlySuperuser();
+        oAuthService.OnlySuperuser();
         
         if (strFilter == null || strFilter.length()==0) {
             return oProfesorRepository.findAll(oPageable);
@@ -51,7 +51,7 @@ public class ProfesorService {
     }
 
     public Long create(ProfesorEntity profesorRecibido) {
-        //oAuthService.OnlySuperuser();
+        oAuthService.OnlySuperuser();
         validateEntity(profesorRecibido);
         profesorRecibido.setId(0L);
         profesorRecibido.setPass(GRADIN_DEFAULT_PASSWORD);
@@ -59,7 +59,7 @@ public class ProfesorService {
     }
 
     public ProfesorEntity update(ProfesorEntity oProfesorEntity) {
-        //oAuthService.OnlySuperuser();
+        oAuthService.OnlySuperuser();
         validate(oProfesorEntity.getId());
         validateEntity(oProfesorEntity);
         ProfesorEntity oProfesorOriginal = oProfesorRepository.findById(oProfesorEntity.getId()).get();
@@ -73,7 +73,7 @@ public class ProfesorService {
 
     public Long delete(Long id) {
         validate(id);
-        //oAuthService.OnlySuperuser();
+        oAuthService.OnlySuperuser();
         oProfesorRepository.deleteById(id);
         return id;
     }

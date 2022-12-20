@@ -4,7 +4,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.lucas.Gradin.bean.ProfesorBean;
 import com.lucas.Gradin.entity.ProfesorEntity;
@@ -14,13 +13,14 @@ import com.lucas.Gradin.exception.UnauthorizedException;
 @Service
 public class AuthService {
     
+    @Autowired
     HttpSession oHttpSession;
 
     @Autowired
     ProfesorRepository oProfesorRepository;
 
     // OPERACIONES DE SESIÓN
-    public ProfesorEntity login(@RequestBody ProfesorBean oProfesorBean) {
+    public ProfesorEntity login(ProfesorBean oProfesorBean) {
         if (oProfesorBean.getPass() != null) {
             ProfesorEntity oProfesorEntity = oProfesorRepository.findByDniAndPass(oProfesorBean.getDni(), oProfesorBean.getPass());
             if (oProfesorEntity != null) {

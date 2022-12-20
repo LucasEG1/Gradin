@@ -1,13 +1,11 @@
 package com.lucas.Gradin.bean;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 public class ProfesorBean {
     
-    @Schema
-    private String dni = "";
-    @Schema
+    private String dni = "";    
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String pass = "";
 

@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lucas.Gradin.bean.ProfesorBean;
 import com.lucas.Gradin.entity.ProfesorEntity;
+import com.lucas.Gradin.service.AuthService;
 import com.lucas.Gradin.service.ProfesorService;
 
 @RestController
@@ -27,6 +29,9 @@ public class ProfesorController {
 
     @Autowired
     private final ProfesorService oProfesorService;
+
+    @Autowired
+    AuthService oAuthService;
 
     public ProfesorController(ProfesorService profesorService) {
         this.oProfesorService = profesorService;
@@ -51,9 +56,14 @@ public class ProfesorController {
     }
 
     // Metodos POST
-    @PostMapping("/new")
+    @PostMapping
     public ResponseEntity<Long> create(@RequestBody ProfesorEntity oProfesorEntity) {
         return new ResponseEntity<Long>(oProfesorService.create(oProfesorEntity), HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<ProfesorEntity> login(@RequestBody ProfesorBean oProfesorEntity) {
+        return new ResponseEntity<ProfesorEntity>(oAuthService.login(oProfesorEntity), HttpStatus.OK);
     }
 
     // Metodos PUT

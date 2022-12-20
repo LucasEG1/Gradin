@@ -59,10 +59,11 @@ public class ProfesorService {
     }
 
     public ProfesorEntity update(ProfesorEntity oProfesorEntity) {
+        //oAuthService.OnlySuperuser();
         validate(oProfesorEntity.getId());
         validateEntity(oProfesorEntity);
-        //oAuthService.OnlySuperuser();
-        
+        ProfesorEntity oProfesorOriginal = oProfesorRepository.findById(oProfesorEntity.getId()).get();
+        oProfesorEntity.setPass(oProfesorOriginal.getPass());
         return oProfesorRepository.save(oProfesorEntity);
     }
 

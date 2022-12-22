@@ -104,27 +104,27 @@ values
 
 insert into alumno (id_clase, dni, NIA, nombre, apellido1, apellido2, email, telefono)
 values
-(1, "12345678A", "12345678", "Juan", "Pérez", "García", "juanpe@gradin.com" , "123456789"),
-(1, "87654321B", "87654321", "María", "García", "Pérez", "mariaga@gradin.com" , "987654321"),
-(2, "23456789C", "23456789", "Pedro", "González", "López", "pedrogo@gradin.com" , "234567890"),
-(2, "98765432D", "98765432", "Ana", "López", "González", "analo@gradin.com" , "987654321"),
-(3, "34567890E", "34567890", "Luis", "Martínez", "Sánchez", "luisma@gradin.com" , "345678901"),
-(3, "09876543F", "09876543", "Laura", "Sánchez", "Martínez", "laurasa@gradin.com" , "098765432"),
-(4, "45678901G", "45678901", "Javier", "Fernández", "Gómez", "javierfe@gradin.com" , "456789012"),
-(4, "10987654H", "10987654", "Sara", "Gómez", null, "sarago@gradin.com" , "109876543"),
-(5, "56789012I", "56789012", "Carlos", "Rodríguez", "Martín", "carlosro@gradin.com" , "567890123"),
-(5, "21098765J", "21098765", "Marta", "Martín", "Rodríguez", "martama@gradin.com" , "210987654"),
-(6, "67890123K", "67890123", "Daniel", "Hernández", "Jiménez", "danielher@gradin.com" , "678901234"),
-(6, "32109876L", "32109876", "Lucía", "Jiménez", null, "luciaji@gradin.com" , "321098765")
+(1, "31884393E", "12345678", "Juan", "Pérez", "García", "juanpe@gradin.com" , "123456789"),
+(1, "94835348T", "87654321", "María", "García", "Pérez", "mariaga@gradin.com" , "987654321"),
+(2, "84930462H", "23456789", "Pedro", "González", "López", "pedrogo@gradin.com" , "234567890"),
+(2, "20838893L", "98765432", "Ana", "López", "González", "analo@gradin.com" , "987654321"),
+(3, "54837449K", "34567890", "Luis", "Martínez", "Sánchez", "luisma@gradin.com" , "345678901"),
+(3, "52819585Q", "09876543", "Laura", "Sánchez", "Martínez", "laurasa@gradin.com" , "098765432"),
+(4, "50273344J", "45678901", "Javier", "Fernández", "Gómez", "javierfe@gradin.com" , "456789012"),
+(4, "58278983L", "10987654", "Sara", "Gómez", null, "sarago@gradin.com" , "109876543"),
+(5, "54617839S", "56789012", "Carlos", "Rodríguez", "Martín", "carlosro@gradin.com" , "567890123"),
+(5, "32069195L", "21098765", "Marta", "Martín", "Rodríguez", "martama@gradin.com" , "210987654"),
+(6, "37642354W", "67890123", "Daniel", "Hernández", "Jiménez", "danielher@gradin.com" , "678901234"),
+(6, "07453878S", "32109876", "Lucía", "Jiménez", null, "luciaji@gradin.com" , "321098765")
 ;
 
 insert into profesor (dni, nombre, apellido1, apellido2, email, superuser)
 values
 ("00000000T", "Admin", "Admin", null, "superuser@gradin.com", 1),
-("12345678A", "Adrián", "Ruiz", "Díez", "adrianru@gradin.com", 0),
-("87654321B", "Beatriz", "García", "González", "beatrizga@gradin.com", 0),
-("23456789C", "Carlos", "López", "Casado", "carloslo@gradin.com", 0),
-("98765432D", "Dolores", "Martínez", "Gómez", "doloresma@gradin.com", 0)
+("44075692X", "Adrián", "Ruiz", "Díez", "adrianru@gradin.com", 0),
+("51186001F", "Beatriz", "García", "González", "beatrizga@gradin.com", 0),
+("10666645G", "Carlos", "López", "Casado", "carloslo@gradin.com", 0),
+("33107509K", "Dolores", "Martínez", "Gómez", "doloresma@gradin.com", 0)
 ;
 
 insert into asignatura (id_profesor, nombre)

@@ -3,6 +3,7 @@ package com.lucas.Gradin.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,17 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<ProfesorEntity> login(@RequestBody ProfesorBean oProfesorBean) {
         return new ResponseEntity<ProfesorEntity>(oAuthService.login(oProfesorBean), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<ProfesorEntity> check() {
+        return new ResponseEntity<ProfesorEntity>(oAuthService.check(), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/logout")
+    public ResponseEntity<?> logout() {
+        oAuthService.logout();
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
 }

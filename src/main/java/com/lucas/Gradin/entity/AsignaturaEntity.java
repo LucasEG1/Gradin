@@ -31,7 +31,9 @@ public class AsignaturaEntity {
     private ProfesorEntity profesor;
     
     private String nombre;
-    private String ISBNLibro;
+
+    @JoinColumn(name = "isbn_libro")
+    private String isbnLibro;
 
     @OneToMany(mappedBy = "asignatura", fetch = FetchType.LAZY)
     private List<NotaEntity> notas;
@@ -40,11 +42,11 @@ public class AsignaturaEntity {
     public AsignaturaEntity() {
         this.notas = new ArrayList<NotaEntity>();
     }
-    public AsignaturaEntity(Long id, ProfesorEntity profesor, String nombre, String iSBNLibro) {
+    public AsignaturaEntity(Long id, ProfesorEntity profesor, String nombre, String isbnLibro) {
         this.id = id;
         this.profesor = profesor;
         this.nombre = nombre;
-        ISBNLibro = iSBNLibro;
+        this.isbnLibro = isbnLibro;
         this.notas = new ArrayList<NotaEntity>();
     }
 
@@ -67,11 +69,11 @@ public class AsignaturaEntity {
         this.nombre = nombre;
     }
 
-    public String getISBNLibro() {
-        return ISBNLibro;
+    public String getIsbnLibro() {
+        return isbnLibro;
     }
-    public void setISBNLibro(String iSBNLibro) {
-        ISBNLibro = iSBNLibro;
+    public void setIsbnLibro(String isbnLibro) {
+        this.isbnLibro = isbnLibro;
     }
 
     public int getNotas() {

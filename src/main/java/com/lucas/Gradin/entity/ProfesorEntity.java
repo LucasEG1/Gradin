@@ -35,8 +35,6 @@ public class ProfesorEntity {
 
     private boolean superuser;
 
-
-
     @OneToMany(mappedBy = "profesor", fetch = FetchType.LAZY)
     private List<AsignaturaEntity> asignaturas;
 

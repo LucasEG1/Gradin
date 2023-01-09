@@ -26,7 +26,6 @@ public class AsignaturaService {
         }
     }
     public void validateEntity(AsignaturaEntity oAsignaturaEntity) {
-        validate(oAsignaturaEntity.getId()); // Comprueba que el id existe
         validate(oAsignaturaEntity.getProfesor().getId()); // Comprueba que el profesor existe
         ValidationHelper.validateStringLength(oAsignaturaEntity.getNombre(), 1, 50, "El nombre debe tener entre 1 y 50 caracteres.");
         ValidationHelper.validateStringLength(oAsignaturaEntity.getIsbnLibro(), 10, 13, "El ISBN debe tener 10 o 13 caracteres.");
@@ -52,6 +51,7 @@ public class AsignaturaService {
 
     public Long create(AsignaturaEntity nuevaAsignaturaEntity) {
         oAuthService.OnlySuperuser();
+        nuevaAsignaturaEntity.setId(0L);
         validateEntity(nuevaAsignaturaEntity);
         return oAsignaturaRepository.save(nuevaAsignaturaEntity).getId();
     }

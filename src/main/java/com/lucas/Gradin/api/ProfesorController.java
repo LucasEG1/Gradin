@@ -60,11 +60,6 @@ public class ProfesorController {
         return new ResponseEntity<Long>(oProfesorService.create(oProfesorEntity), HttpStatus.OK);
     }
 
-    @PostMapping("/generate")
-    public ResponseEntity<Long> generate() {
-        return new ResponseEntity<Long>(oProfesorService.generateOne(), HttpStatus.OK);
-    }
-
     @PostMapping("/generate/{amount}")
     public ResponseEntity<Long> generate(@PathVariable int amount) {
         return new ResponseEntity<Long>(oProfesorService.generateMany(amount), HttpStatus.OK);

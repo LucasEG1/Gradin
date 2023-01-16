@@ -1,5 +1,8 @@
 package com.lucas.Gradin.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
@@ -16,24 +19,24 @@ public class ProfesorService {
 
     private final String GRADIN_DEFAULT_PASSWORD = "7a84143d54b59fe2186d394f66fa59b5b81e12c8edf9cbe71cece88d9388ff45";
     private final String[] NOMBRES_PROFESORES = {
-        "Alberto", "Flora", "Daniela", "Isabela", "Guillermo",
-        "Luis", "Miguel", "Javier", "Jorge", "Jesús",
-        "Juan", "José", "Manuel", "Francisco", "Antonio",
-        "Gabriel", "Carlos", "Daniel", "David", "Diego",
-        "Eduardo", "Elias", "Enrique", "Esteban", "Fernando",
-        "Fidel", "Félix", "Francisco", "Gabriel", "Gonzalo",
-        "Gregorio", "Guillermo", "Héctor", "Hugo", "Ignacio",
-        "Iker", "Isaac", "Ismael", "Iván", "Jaime"};
-        
+            "Alberto", "Flora", "Daniela", "Isabela", "Guillermo",
+            "Luis", "Miguel", "Javier", "Jorge", "Jesús",
+            "Juan", "José", "Manuel", "Francisco", "Antonio",
+            "Gabriel", "Carlos", "Daniel", "David", "Diego",
+            "Eduardo", "Elias", "Enrique", "Esteban", "Fernando",
+            "Fidel", "Félix", "Francisco", "Gabriel", "Gonzalo",
+            "Gregorio", "Guillermo", "Héctor", "Hugo", "Ignacio",
+            "Iker", "Isaac", "Ismael", "Iván", "Jaime"};
+
     private final String[] APELLIDOS_PROFESORES = {
-        "García", "González", "Rodríguez", "Fernández", "López",
-        "Martínez", "Sánchez", "Pérez", "Gómez", "Martín",
-        "Jiménez", "Ruiz", "Hernández", "Díaz", "Moreno",
-        "Álvarez", "Muñoz", "Romero", "Alonso", "Gutiérrez",
-        "Navarro", "Torres", "Domínguez", "Vázquez", "Ramos",
-        "Gil", "Ramírez", "Serrano", "Blanco", "Suárez",
-        "Molina", "Morales", "Ortega", "Delgado", "Castro",
-        "Ortiz", "Rubio", "Marín", "Sanz", "Iglesias"};
+            "García", "González", "Rodríguez", "Fernández", "López",
+            "Martínez", "Sánchez", "Pérez", "Gómez", "Martín",
+            "Jiménez", "Ruiz", "Hernández", "Díaz", "Moreno",
+            "Álvarez", "Muñoz", "Romero", "Alonso", "Gutiérrez",
+            "Navarro", "Torres", "Domínguez", "Vázquez", "Ramos",
+            "Gil", "Ramírez", "Serrano", "Blanco", "Suárez",
+            "Molina", "Morales", "Ortega", "Delgado", "Castro",
+            "Ortiz", "Rubio", "Marín", "Sanz", "Iglesias"};
 
     @Autowired
     private ProfesorRepository oProfesorRepository;
@@ -47,10 +50,11 @@ public class ProfesorService {
             throw new ResourceNotFoundException("No existe el profesor con id " + id + ".");
         }
     }
+
     public void validateEntity(ProfesorEntity oProfesorEntity) {
-        ValidationHelper.validateDNI(oProfesorEntity.getDni() , "campo DNI de Usuario");
-        ValidationHelper.validateStringLength(oProfesorEntity.getNombre(), 2, 20, "campo 'nombre' del profesor debe tener longitud entre 2 y 20 caracteres");
-        ValidationHelper.validateStringLength(oProfesorEntity.getApellido1(), 2, 20, "campo 'apellido 1' del profesor debe tener longitud entre 2 y 20 caracteres");
+        ValidationHelper.validateDNI(oProfesorEntity.getDni(), "campo DNI de Usuario");
+        ValidationHelper.validateStringLength(oProfesorEntity.getNombre(), 2, 20,"campo 'nombre' del profesor debe tener longitud entre 2 y 20 caracteres");
+        ValidationHelper.validateStringLength(oProfesorEntity.getApellido1(), 2, 20,"campo 'apellido 1' del profesor debe tener longitud entre 2 y 20 caracteres");
         ValidationHelper.validateEmail(oProfesorEntity.getEmail(), " proporciona un correo electrónico válido");
     }
 
@@ -62,8 +66,8 @@ public class ProfesorService {
 
     public Page<ProfesorEntity> getPage(Pageable oPageable, String strFilter) {
         oAuthService.OnlySuperuser();
-        
-        if (strFilter == null || strFilter.length()==0) {
+
+        if (strFilter == null || strFilter.length() == 0) {
             return oProfesorRepository.findAll(oPageable);
         } else {
             return oProfesorRepository.findByNombreIgnoreCaseContainingOrApellido1IgnoreCaseContainingOrApellido2IgnoreCaseContaining(strFilter, strFilter, strFilter, oPageable);
@@ -78,7 +82,7 @@ public class ProfesorService {
         return oProfesorRepository.save(profesorRecibido).getId();
     }
 
-    public Long generateOne() {
+    public ProfesorEntity generateOne() {
         oAuthService.OnlySuperuser();
         ProfesorEntity oProfesorEntity = new ProfesorEntity();
         oProfesorEntity.setId(0L);
@@ -88,13 +92,16 @@ public class ProfesorService {
         oProfesorEntity.setApellido2(APELLIDOS_PROFESORES[(int) (Math.random() * APELLIDOS_PROFESORES.length)]);
         oProfesorEntity.setEmail(RandomHelper.generateEmail(oProfesorEntity.getNombre(), oProfesorEntity.getApellido1()));
         oProfesorEntity.setPass(GRADIN_DEFAULT_PASSWORD);
-        return oProfesorRepository.save(oProfesorEntity).getId();
+        return oProfesorRepository.save(oProfesorEntity);
     }
-    public Long generateMany(int n) {
+
+    public Long generateMany(int amount) {
         oAuthService.OnlySuperuser();
-        for (int i = 0; i < n; i++) {
-            generateOne();
+        List<ProfesorEntity> ProfesorToSave = new ArrayList<>();
+        for (int i = 0; i < amount; i++) {
+            ProfesorToSave.add(generateOne());
         }
+        oProfesorRepository.saveAll(ProfesorToSave);
         return count();
     }
 

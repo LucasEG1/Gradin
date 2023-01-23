@@ -50,6 +50,10 @@ public class NotaEntity {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public AlumnoEntity getAlumno() {
         return alumno;
     }

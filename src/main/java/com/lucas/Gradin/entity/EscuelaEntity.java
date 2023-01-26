@@ -20,7 +20,7 @@ public class EscuelaEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     private String nombre;
     private String direccion;
@@ -33,7 +33,7 @@ public class EscuelaEntity {
     public EscuelaEntity() {
         this.aulas = new ArrayList<AulaEntity>();
     }
-    public EscuelaEntity(String id, String nombre, String direccion, String CP, List<AulaEntity> aulas) {
+    public EscuelaEntity(Long id, String nombre, String direccion, String CP, List<AulaEntity> aulas) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -42,8 +42,11 @@ public class EscuelaEntity {
     }
 
     //Getters y Setters
-    public String getId() {
+    public Long getId() {
         return id;
+    }
+    public void setId(Long id){
+        this.id = id;
     }
 
     public String getNombre() {

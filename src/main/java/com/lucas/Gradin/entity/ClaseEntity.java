@@ -23,7 +23,7 @@ public class ClaseEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_aula")
@@ -38,7 +38,7 @@ public class ClaseEntity {
     public ClaseEntity() {
         this.alumnos = new ArrayList<AlumnoEntity>();
     }
-    public ClaseEntity(String id, AulaEntity aula, String nombre, List<AlumnoEntity> alumnos) {
+    public ClaseEntity(Long id, AulaEntity aula, String nombre, List<AlumnoEntity> alumnos) {
         this.id = id;
         this.aula = aula;
         this.nombre = nombre;
@@ -46,9 +46,14 @@ public class ClaseEntity {
     }
 
     //Getters y Setters
-    public String getId() {
+    public Long getId() {
         return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public AulaEntity getAula() {
         return aula;
     }

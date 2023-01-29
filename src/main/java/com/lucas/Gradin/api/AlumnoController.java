@@ -53,6 +53,11 @@ public class AlumnoController {
         return new ResponseEntity<Long>(oAlumnoService.create(oAlumnoEntity), HttpStatus.OK);
     }
 
+    @PostMapping("/generate/{cantidad}")
+    public ResponseEntity<Long> generate(@PathVariable(value = "cantidad") int cantidad) {
+        return new ResponseEntity<Long>(oAlumnoService.generateMany(cantidad), HttpStatus.OK);
+    }
+
     // Metodos PUT
     @PutMapping
     public ResponseEntity<AlumnoEntity> update(@RequestBody AlumnoEntity oAlumnoEntity) {

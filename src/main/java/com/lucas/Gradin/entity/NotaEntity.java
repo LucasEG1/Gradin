@@ -32,12 +32,12 @@ public class NotaEntity {
     @JoinColumn(name = "id_asignatura")
     private AsignaturaEntity asignatura;
 
-    private Long valor;
+    private Double valor;
 
     //Constructores
     public NotaEntity() {
     }
-    public NotaEntity(Long id, AlumnoEntity alumno, EvaluacionEntity evaluacion, AsignaturaEntity asignatura, Long valor) {
+    public NotaEntity(Long id, AlumnoEntity alumno, EvaluacionEntity evaluacion, AsignaturaEntity asignatura, Double valor) {
         this.id = id;
         this.alumno = alumno;
         this.evaluacion = evaluacion;
@@ -75,10 +75,10 @@ public class NotaEntity {
         this.asignatura = asignatura;
     }
 
-    public Long getValor() {
+    public Double getValor() {
         return valor;
     }
-    public void setValor(Long valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 

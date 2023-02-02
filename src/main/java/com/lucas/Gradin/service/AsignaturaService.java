@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.lucas.Gradin.entity.AsignaturaEntity;
 import com.lucas.Gradin.exception.ResourceNotFoundException;
 import com.lucas.Gradin.repository.AsignaturaRepository;
+import com.lucas.Gradin.repository.ProfesorRepository;
 import com.lucas.Gradin.helper.ValidationHelper;
 
 @Service
@@ -17,23 +18,32 @@ public class AsignaturaService {
     private AsignaturaRepository oAsignaturaRepository;
 
     @Autowired
+    private ProfesorRepository oProfesorRepository;
+
+    @Autowired
     private AuthService oAuthService;
 
     // VALIDACIONES
-    public void validate(Long id) {
+    public void validateAsignaturaId(Long id) {
         if (!oAsignaturaRepository.existsById(id)) {
             throw new ResourceNotFoundException("No existe asignatura con id " + id + ".");
         }
     }
+    public void validateProfesorId(Long id) {
+        if (!oProfesorRepository.existsById(id)) {
+            throw new ResourceNotFoundException("No existe profesor con id " + id + ".");
+        }
+    }
+
     public void validateEntity(AsignaturaEntity oAsignaturaEntity) {
-        validate(oAsignaturaEntity.getProfesor().getId()); // Comprueba que el profesor existe
+        validateProfesorId(oAsignaturaEntity.getProfesor().getId()); // Comprueba que el profesor existe
         ValidationHelper.validateStringLength(oAsignaturaEntity.getNombre(), 1, 50, "El nombre debe tener entre 1 y 50 caracteres.");
         ValidationHelper.validateStringLength(oAsignaturaEntity.getIsbnLibro(), 10, 13, "El ISBN debe tener 10 o 13 caracteres.");
     }
 
     public AsignaturaEntity getOne(Long id) {
         oAuthService.OnlyOwnerOrSuperuser(id);
-        validate(id);
+        validateAsignaturaId(id);
         return oAsignaturaRepository.findById(id).get();
     }
 
@@ -58,7 +68,7 @@ public class AsignaturaService {
 
     public AsignaturaEntity update(AsignaturaEntity oAsignaturaEntity) {
         oAuthService.OnlySuperuser();
-        validate(oAsignaturaEntity.getId());
+        validateAsignaturaId(oAsignaturaEntity.getId());
         validateEntity(oAsignaturaEntity);
         return oAsignaturaRepository.save(oAsignaturaEntity);
     }
@@ -68,7 +78,7 @@ public class AsignaturaService {
     }
 
     public Long delete(Long id) {
-        validate(id);
+        validateAsignaturaId(id);
         oAuthService.OnlySuperuser();
         oAsignaturaRepository.deleteById(id);
         return id;

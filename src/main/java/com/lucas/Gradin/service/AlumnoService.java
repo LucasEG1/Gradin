@@ -73,15 +73,20 @@ public class AlumnoService {
     };
 
     // VALIDACIONES
-    public void validate(Long id) {
+    public void validateAlumnoId(Long id) {
         if (!alumnoRepository.existsById(id)) {
             throw new ResourceNotFoundException("No existe alumno con id " + id + ".");
+        }
+    }
+    public void validateClaseId(Long id) {
+        if (!claseRepository.existsById(id)) {
+            throw new ResourceNotFoundException("No existe clase con id " + id + ".");
         }
     }
 
     public AlumnoEntity getOne(Long id) {
         oAuthService.OnlyOwnerOrSuperuser(id);
-        validate(id);
+        validateAlumnoId(id);
         return alumnoRepository.findById(id).get();
     }
 
@@ -100,19 +105,20 @@ public class AlumnoService {
     public Long create(AlumnoEntity nuevoAlumnoEntity) {
         oAuthService.OnlySuperuser();
         nuevoAlumnoEntity.setId(0L);
+        validateClaseId(nuevoAlumnoEntity.getClase().getId());
         return alumnoRepository.save(nuevoAlumnoEntity).getId();
     }
 
     public AlumnoEntity update(AlumnoEntity oAlumnoEntity) {
         oAuthService.OnlySuperuser();
-        validate(oAlumnoEntity.getId());
+        validateAlumnoId(oAlumnoEntity.getId());
+        validateClaseId(oAlumnoEntity.getClase().getId());
         return alumnoRepository.save(oAlumnoEntity);
     }
 
     public Long delete(Long id) {
         oAuthService.OnlySuperuser();
-        validate(id);
-        alumnoRepository.deleteById(id);
+        validateAlumnoId(id);
         return id;
     }
 

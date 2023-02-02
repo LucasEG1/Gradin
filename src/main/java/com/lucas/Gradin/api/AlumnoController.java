@@ -47,6 +47,11 @@ public class AlumnoController {
         return new ResponseEntity<Page<AlumnoEntity>>(oAlumnoService.getPage(oPageable, idClase, strFilter), HttpStatus.OK);
     }
 
+    @GetMapping("/count")
+    public ResponseEntity<Long> count() {
+        return new ResponseEntity<Long>(oAlumnoService.count(), HttpStatus.OK);
+    }
+
     // Metodos POST
     @PostMapping
     public ResponseEntity<Long> create(@RequestBody AlumnoEntity oAlumnoEntity) {

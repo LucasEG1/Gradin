@@ -43,6 +43,11 @@ public class AulaService {
         }
     }
 
+    public Long count() {
+        oAuthService.OnlySuperuser();
+        return aulaRepository.count();
+    }
+
     public Long create(AulaEntity nuevoAulaEntity) {
         oAuthService.OnlySuperuser();
         nuevoAulaEntity.setId(0L);

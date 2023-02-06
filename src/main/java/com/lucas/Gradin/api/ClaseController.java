@@ -46,6 +46,11 @@ public class ClaseController {
         return new ResponseEntity<Page<ClaseEntity>>(oClaseService.getPage(oPageable, strFilter, idAula), HttpStatus.OK);
     }
 
+    @GetMapping("/count")
+    public ResponseEntity<Long> count() {
+        return new ResponseEntity<Long>(oClaseService.count(), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Long> create(@RequestBody ClaseEntity oClaseEntity) {
         return new ResponseEntity<Long>(oClaseService.create(oClaseEntity), HttpStatus.OK);

@@ -40,6 +40,11 @@ public class AulaController {
         return new ResponseEntity<Page<AulaEntity>>(oAulaService.getPage(oPageable, strFilter, idEscuela), HttpStatus.OK);
     }
 
+    @GetMapping("/count")
+    public ResponseEntity<Long> count() {
+        return new ResponseEntity<Long>(oAulaService.count(), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Long> create(@RequestBody AulaEntity oAulaEntity) {
         return new ResponseEntity<Long>(oAulaService.create(oAulaEntity), HttpStatus.OK);

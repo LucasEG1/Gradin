@@ -43,6 +43,11 @@ public class ClaseService {
         }
     }
 
+    public Long count() {
+        oAuthService.OnlySuperuser();
+        return claseRepository.count();
+    }
+
     public Long create(ClaseEntity nuevoClaseEntity) {
         oAuthService.OnlySuperuser();
         nuevoClaseEntity.setId(0L);

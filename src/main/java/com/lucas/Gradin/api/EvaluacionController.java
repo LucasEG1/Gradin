@@ -25,11 +25,9 @@ public class EvaluacionController {
         this.oEvaluacionService = oEvaluacionService;
     }
 
-    /*
     @GetMapping
     public ResponseEntity<Page<EvaluacionEntity>> getPage(@PageableDefault(page = 0, size = 5, direction = Sort.Direction.DESC) Pageable oPageable) {
-        //return new ResponseEntity<>(oEvaluacionService.getEvaluaciones(oPageable), HttpStatus.OK);
-        return new ResponseEntity<Page<EvaluacionEntity>>(oEvaluacionService.getEvaluaciones(), HttpStatus.OK);
-    }*/
+        return new ResponseEntity<Page<EvaluacionEntity>>(oEvaluacionService.getEvaluaciones(oPageable), HttpStatus.OK);
+    }
     
 }

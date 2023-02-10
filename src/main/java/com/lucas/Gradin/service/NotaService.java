@@ -55,8 +55,18 @@ public class NotaService {
 
     public Long create(NotaEntity nuevaNotaEntity) {
         oAuthService.OnlySuperuser();
-        nuevaNotaEntity.setId(0L);
-        return oNotaRepository.save(nuevaNotaEntity).getId();
+        NotaEntity existeNota = oNotaRepository.findByAlumnoIdAndEvaluacionIdAndAsignaturaId(
+            nuevaNotaEntity.getAlumno().getId(),
+            nuevaNotaEntity.getEvaluacion().getId(),
+            nuevaNotaEntity.getAsignatura().getId());
+        if (existeNota != null) {
+            throw new ResourceNotFoundException("Ya existe una nota con el alumno " + nuevaNotaEntity.getAlumno().getNombre() + " " + nuevaNotaEntity.getAlumno().getApellido1() 
+            + ", la evaluación " + nuevaNotaEntity.getEvaluacion().getNumero()
+            + " y la asignatura " + nuevaNotaEntity.getAsignatura().getNombre() + ".");
+        } else {
+            nuevaNotaEntity.setId(0L);
+            return oNotaRepository.save(nuevaNotaEntity).getId();
+        }
     }
 
     public NotaEntity update(NotaEntity oNotaEntity) {

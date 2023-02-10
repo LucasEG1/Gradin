@@ -15,4 +15,5 @@ public interface NotaRepository extends JpaRepository<NotaEntity, Long> {
     Page<NotaEntity> findByAlumnoIdAndAsignaturaId(Long idAlumno, Long idAsignatura, Pageable oPageable);
     Page<NotaEntity> findByEvaluacionIdAndAsignaturaId(Long idEvaluacion, Long idAsignatura, Pageable oPageable);
     Page<NotaEntity> findByAlumnoIdAndEvaluacionIdAndAsignaturaId(Long idAlumno, Long idEvaluacion, Long idProfesor, Pageable oPageable);
+    NotaEntity findByAlumnoIdAndEvaluacionIdAndAsignaturaId(Long idAlumno, Long idEvaluacion, Long idProfesor);
 }

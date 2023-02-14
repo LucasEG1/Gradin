@@ -130,6 +130,8 @@ public class AlumnoService {
     public AlumnoEntity generateRandom() {
         oAuthService.OnlySuperuser();
         AlumnoEntity oAlumnoEntity = new AlumnoEntity();
+        oAlumnoEntity.setDni(generateDni());
+        oAlumnoEntity.setNia(generateNia());
         oAlumnoEntity.setNombre(NOMBRES[(int) (Math.random() * NOMBRES.length)]);
         oAlumnoEntity.setApellido1(APELLIDOS[(int) (Math.random() * APELLIDOS.length)]);
         oAlumnoEntity.setApellido2(APELLIDOS[(int) (Math.random() * APELLIDOS.length)]);
@@ -137,6 +139,27 @@ public class AlumnoService {
         oAlumnoEntity.setTelefono("6" + (int) (Math.random() * 100000000));
         oAlumnoEntity.setClase(claseRepository.findById((long) (Math.random() * claseRepository.count() + 1)).get());  
         return alumnoRepository.save(oAlumnoEntity);
+    }
+
+    public String generateDni() {
+        oAuthService.OnlySuperuser();
+        String strDni = "";
+        for (int i = 0; i < 8; i++) {
+            strDni += (int) (Math.random() * 10);
+        }
+        //calcular letra
+        String strLetras = "TRWAGMYFPDXBNJZSQVHLCKE";
+        int iPosicion = Integer.parseInt(strDni) % 23;
+        strDni += strLetras.charAt(iPosicion);
+        return strDni;
+    }
+    public String generateNia() {
+        oAuthService.OnlySuperuser();
+        String strNia = "";
+        for (int i = 0; i < 8; i++) {
+            strNia += (int) (Math.random() * 10);
+        }
+        return strNia;
     }
 
     public Long count() {

@@ -60,9 +60,7 @@ public class NotaService {
             nuevaNotaEntity.getEvaluacion().getId(),
             nuevaNotaEntity.getAsignatura().getId());
         if (existeNota != null) {
-            throw new ResourceNotFoundException("Ya existe una nota con el alumno " + nuevaNotaEntity.getAlumno().getNombre() + " " + nuevaNotaEntity.getAlumno().getApellido1() 
-            + ", la evaluación " + nuevaNotaEntity.getEvaluacion().getNumero()
-            + " y la asignatura " + nuevaNotaEntity.getAsignatura().getNombre() + ".");
+            throw new ResourceNotFoundException("Ya existe una nota con los datos proporcionados.");
         } else {
             nuevaNotaEntity.setId(0L);
             return oNotaRepository.save(nuevaNotaEntity).getId();

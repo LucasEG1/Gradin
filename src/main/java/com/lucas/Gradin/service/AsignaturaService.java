@@ -13,7 +13,7 @@ import com.lucas.Gradin.helper.ValidationHelper;
 
 @Service
 public class AsignaturaService {
-    
+
     @Autowired
     private AsignaturaRepository oAsignaturaRepository;
 
@@ -48,10 +48,12 @@ public class AsignaturaService {
     }
 
     public Page<AsignaturaEntity> getPage(Pageable oPageable, String strFilter, Long idProfesor) {
-        oAuthService.OnlySuperuser();
-        
-        if (strFilter == null || strFilter.length()==0 && idProfesor == null) {
+        oAuthService.OnlyOwnerOrSuperuser(idProfesor);
+
+        if ((strFilter == null || strFilter.length()==0) && idProfesor == null) {
             return oAsignaturaRepository.findAll(oPageable);
+        } else if (strFilter == null || strFilter.length()==0) {
+            return oAsignaturaRepository.findByProfesorId(idProfesor, oPageable);
         } else if (idProfesor == null) {
             return oAsignaturaRepository.findByNombreIgnoreCaseContainingOrIsbnLibroIgnoreCaseContaining(strFilter, strFilter, oPageable);
         } else {

@@ -12,4 +12,5 @@ public interface AsignaturaRepository extends JpaRepository<AsignaturaEntity, Lo
     // Buscar por nombre, isbn o profesor
     Page<AsignaturaEntity> findByNombreIgnoreCaseContainingOrIsbnLibroIgnoreCaseContainingAndProfesorId(String strNombre, String strIsbn, Long idProfesor, Pageable oPageable);
 
+    Page<AsignaturaEntity> findByProfesorId(Long idProfesor, Pageable oPageable);
 }

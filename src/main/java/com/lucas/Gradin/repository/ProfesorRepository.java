@@ -7,8 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.lucas.Gradin.entity.ProfesorEntity;
 
 public interface ProfesorRepository extends JpaRepository<ProfesorEntity, Long> {
-    
+
     Page<ProfesorEntity> findByNombreIgnoreCaseContainingOrApellido1IgnoreCaseContainingOrApellido2IgnoreCaseContaining(String strNombre, String strApellido1, String strApellido2, Pageable oPageable);
     ProfesorEntity findByDniAndPass(String strDni, String strPass);
-
 }

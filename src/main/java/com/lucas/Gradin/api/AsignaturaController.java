@@ -38,8 +38,10 @@ public class AsignaturaController {
 
     // Metodos GET
     @GetMapping("/{id}")
-    public ResponseEntity<AsignaturaEntity> getOne(@PathVariable(value = "id") Long id) {
-        return new ResponseEntity<AsignaturaEntity>(oAsignaturaService.getOne(id), HttpStatus.OK);
+    public ResponseEntity<AsignaturaEntity> getOne(
+            @PathVariable(value = "id") Long id,
+            @RequestParam(name = "profesor", required = false) Long idProfesor) {
+        return new ResponseEntity<AsignaturaEntity>(oAsignaturaService.getOne(id, idProfesor), HttpStatus.OK);
     }
 
     @GetMapping

@@ -1,5 +1,6 @@
 package com.lucas.Gradin.service;
 
+import com.lucas.Gradin.entity.ProfesorEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,11 +10,16 @@ import com.lucas.Gradin.entity.NotaEntity;
 import com.lucas.Gradin.exception.ResourceNotFoundException;
 import com.lucas.Gradin.repository.NotaRepository;
 
+import javax.servlet.http.HttpSession;
+
 @Service
 public class NotaService {
-    
+
     @Autowired
     private NotaRepository oNotaRepository;
+
+    @Autowired
+    private AsignaturaService oAsignaturaService;
 
     @Autowired
     private AuthService oAuthService;
@@ -31,9 +37,9 @@ public class NotaService {
         return oNotaRepository.findById(id).get();
     }
 
-    public Page<NotaEntity> getPage(Pageable oPageable, Long idAlumno, Long idAsignatura, Long idEvaluacion ) {
-        oAuthService.OnlySuperuser();
-        
+    public Page<NotaEntity> getPage(Pageable oPageable, Long idAlumno, Long idAsignatura, Long idEvaluacion, Long idProfesor) {
+        oAuthService.OnlyOwnerOrSuperuser(idProfesor);
+
         if (idAlumno == null && idEvaluacion == null && idAsignatura == null) {
             return oNotaRepository.findAll(oPageable);
         } else if (idAlumno == null && idEvaluacion == null) {
@@ -67,8 +73,8 @@ public class NotaService {
         }
     }
 
-    public NotaEntity update(NotaEntity oNotaEntity) {
-        oAuthService.OnlySuperuser();
+    public NotaEntity update(NotaEntity oNotaEntity, Long idProfesor) {
+        oAuthService.OnlyOwnerOrSuperuser(idProfesor);
         validate(oNotaEntity.getId());
         return oNotaRepository.save(oNotaEntity);
     }

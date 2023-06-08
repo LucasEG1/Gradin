@@ -23,7 +23,7 @@ import com.lucas.Gradin.service.NotaService;
 @RestController
 @RequestMapping("/nota")
 public class NotaController {
-    
+
     @Autowired
     private NotaService oNotaService;
 
@@ -39,10 +39,11 @@ public class NotaController {
     @GetMapping
     public ResponseEntity<Page<NotaEntity>> getPage(
             @PageableDefault(page = 0, size = 5, direction = Sort.Direction.DESC) Pageable oPageable,
-            @RequestParam(name = "idAlumno", required = false) Long idAlumno,
-            @RequestParam(name = "idAsignatura", required = false) Long idAsignatura,
-            @RequestParam(name = "idEvaluacion", required = false) Long idEvaluacion) {
-        return new ResponseEntity<>(oNotaService.getPage(oPageable, idAlumno, idAsignatura, idEvaluacion), HttpStatus.OK);
+            @RequestParam(name = "alumno", required = false) Long idAlumno,
+            @RequestParam(name = "asignatura", required = false) Long idAsignatura,
+            @RequestParam(name = "evaluacion", required = false) Long idEvaluacion,
+            @RequestParam(name = "profesor") Long idProfesor) {
+        return new ResponseEntity<>(oNotaService.getPage(oPageable, idAlumno, idAsignatura, idEvaluacion, idProfesor), HttpStatus.OK);
     }
 
     @GetMapping("/count")
@@ -56,8 +57,8 @@ public class NotaController {
     }
 
     @PutMapping
-    public ResponseEntity<NotaEntity> update(@RequestBody NotaEntity oNotaEntity) {
-        return new ResponseEntity<NotaEntity>(oNotaService.update(oNotaEntity), HttpStatus.OK);
+    public ResponseEntity<NotaEntity> update(@RequestBody NotaEntity oNotaEntity, @RequestParam(name = "profesor") Long idProfesor) {
+        return new ResponseEntity<NotaEntity>(oNotaService.update(oNotaEntity, idProfesor), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

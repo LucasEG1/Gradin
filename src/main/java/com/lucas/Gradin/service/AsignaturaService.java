@@ -41,8 +41,8 @@ public class AsignaturaService {
         ValidationHelper.validateStringLength(oAsignaturaEntity.getIsbnLibro(), 10, 13, "El ISBN debe tener 10 o 13 caracteres.");
     }
 
-    public AsignaturaEntity getOne(Long id) {
-        oAuthService.OnlyOwnerOrSuperuser(id);
+    public AsignaturaEntity getOne(Long id, Long idProfesor) {
+        oAuthService.OnlyOwnerOrSuperuser(idProfesor);
         validateAsignaturaId(id);
         return oAsignaturaRepository.findById(id).get();
     }
